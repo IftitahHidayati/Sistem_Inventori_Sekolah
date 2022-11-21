@@ -17,19 +17,17 @@
                         <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
                     </a>
                 </li>
-                @can('manage-MasterData')
-                <li>
-                    <a href="{{ route('kategori.index') }}" class="dropdown-toggle no-arrow @yield('menu_kategori')">
-                        <span class="micon dw dw-diagram"></span><span class="mtext">Kategori Barang</span>
-                    </a>
-                </li>
-                @endcan
+                @if(Auth::user()->role == 'Administrator')
                 <li>
                     <a href="{{ route('barang.index') }}" class="dropdown-toggle no-arrow @yield('menu_barang')">
                         <span class="micon dw dw-box"></span><span class="mtext">Barang</span>
                     </a>
                 </li>
-                @can('manage-MasterData')
+                <li>
+                    <a href="{{ route('kategori.index') }}" class="dropdown-toggle no-arrow @yield('menu_kategori')">
+                        <span class="micon dw dw-diagram"></span><span class="mtext">Kategori Barang</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('supplier.index') }}" class="dropdown-toggle no-arrow @yield('menu_supplier')">
                         <span class="micon dw dw-shop"></span><span class="mtext">Supplier</span>
@@ -40,8 +38,13 @@
                         <span class="micon fa fa-users"></span><span class="mtext">Data User</span>
                     </a>
                 </li>
-                @endcan
-                @can('manage-transaksi')
+                @endif
+                @if(Auth::user()->role == 'Operator')
+                <li>
+                    <a href="{{ route('barang.index') }}" class="dropdown-toggle no-arrow @yield('menu_barang')">
+                        <span class="micon dw dw-box"></span><span class="mtext">Barang</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('BarangKeluar.index') }}" class="dropdown-toggle no-arrow @yield('menu_BarangKeluar')">
                         <span class="micon dw dw-outbox"></span><span class="mtext">Barang Keluar</span>
