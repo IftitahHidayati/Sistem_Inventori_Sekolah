@@ -6,6 +6,7 @@ use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class KategoriController extends Controller
@@ -18,19 +19,19 @@ class KategoriController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware(function($request, $next){
-        // if(Gate::allows('manage-MasterData')) return $next($request);
-        // abort(403, 'Anda tidak memiliki cukup hak akses');
-        // });
+        $this->middleware(function ($request, $next) {
+            if (Auth::user()->role == 'Administrator') return $next($request);
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
     }
 
     public function index(Request $request)
     {
-        if($request->has('search')){
+        if ($request->has('search')) {
             $kategori = Kategori::where('kode_kategori', 'like', "%" . $request->search . "%")
-            ->orwhere('nama_kategori', 'like', "%" . $request->search . "%")
-            ->orwhere('keterangan', 'like', "%" . $request->search . "%")
-            ->paginate();
+                ->orwhere('nama_kategori', 'like', "%" . $request->search . "%")
+                ->orwhere('keterangan', 'like', "%" . $request->search . "%")
+                ->paginate();
             return view('Kategori.index', compact('kategori'));
         } else {
             $kategori = Kategori::paginate(10);
@@ -60,14 +61,14 @@ class KategoriController extends Controller
         $request->validate([
             'kode_kategori' => 'required',
             'nama_kategori' => 'required',
-            ]);
+        ]);
 
 
-            Kategori::create($request->all());
+        Kategori::create($request->all());
 
 
-            Alert::success('Success', 'Data Kategori Barang Berhasil Ditambahkan');
-            return redirect()->route('kategori.index');
+        Alert::success('Success', 'Data Kategori Barang Berhasil Ditambahkan');
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -110,14 +111,14 @@ class KategoriController extends Controller
             'kode_kategori' => 'required',
             'nama_kategori' => 'required',
             'keterangan' => 'required',
-            ]);
+        ]);
 
 
-            Kategori::find($id)->update($request->all());
+        Kategori::find($id)->update($request->all());
 
 
-            Alert::success('Success', 'Data Kategori Barang Berhasil Diupdate');
-            return redirect()->route('kategori.index');
+        Alert::success('Success', 'Data Kategori Barang Berhasil Diupdate');
+        return redirect()->route('kategori.index');
     }
 
     /**

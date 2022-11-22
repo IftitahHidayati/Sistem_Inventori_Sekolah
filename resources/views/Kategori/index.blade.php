@@ -39,11 +39,9 @@
                         </div>
                     </form>
                 </div>
-                @can('manage-MasterData')
                 <div class="col-md-40 col-sm-12 text-right">
                     <a class="btn btn-success" href="{{ route('kategori.create') }}"> Create Data </a>
                 </div>
-                @endcan
             </div>
         </div>
         <div class="pb-20">
