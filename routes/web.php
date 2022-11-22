@@ -3,6 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,14 +22,31 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
+
 Route::get('/forgot-password', function () {
     return view('auth.forgot');
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('kategori', KategoriController::class);
+Route::get('/laporan/kategori', [KategoriController::class, 'laporan']);
+
+Route::resource('barang', BarangController::class);
+Route::get('/laporan/barang', [BarangController::class, 'laporan']);
+
+Route::resource('supplier', SupplierController::class);
+Route::get('/laporan/supplier', [SupplierController::class, 'laporan']);
+
+Route::resource('user', UserController::class);
+Route::get('/laporan/user', [UserController::class, 'laporan']);
+Route::get('password/user/{id}', [UserController::class, 'EditPassword'])->name('user.edit.password');
+Route::post('password/user/{id}', [UserController::class, 'UpdatePassword'])->name('user.update.password');
+
+Route::resource('profile', ProfileController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('password/{id}', [PasswordController::class, 'edit'])->name('edit.password');
+    Route::post('password/{id}', [PasswordController::class, 'update'])->name('update.password');
+});
