@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
@@ -44,6 +45,9 @@ Route::resource('user', UserController::class);
 Route::get('/laporan/user', [UserController::class, 'laporan']);
 Route::get('password/user/{id}', [UserController::class, 'EditPassword'])->name('user.edit.password');
 Route::post('password/user/{id}', [UserController::class, 'UpdatePassword'])->name('user.update.password');
+
+Route::resource('BarangKeluar', BarangKeluarController::class);
+Route::get('/laporan/BarangKeluar', [BarangKeluarController::class, 'laporan']);
 
 Route::resource('profile', ProfileController::class);
 Route::group(['middleware' => 'auth'], function () {
