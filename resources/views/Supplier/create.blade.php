@@ -36,7 +36,7 @@
 		<div class="form-group row">
 			<label for="kode_supplier" class="col-sm-12 col-md-2 col-form-label text-white">Kode Supplier</label>
 			<div class="col-sm-12 col-md-10">
-				<input class="form-control" type="text" name="kode_supplier" id="kode_supplier" aria-describedby="kode_supplier" value="{{$code}}" placeholder readonly="">
+				<input class="form-control" type="text" name="kode_supplier" id="kode_supplier" aria-describedby="kode_supplier" placeholder="">
 			</div>
 		</div>
 		<div class="form-group row">
