@@ -33,6 +33,7 @@ class BarangMasukController extends Controller
         if ($request->has('search')) {
             $masuk = BarangMasuk::where('kode_masuk', 'like', "%" . $search . "%")
                 ->orwhere('jumlah_masuk', 'like', "%" . $search . "%")
+                ->orwhere('penerima', 'like', "%" . $search . "%")
                 ->orwhere('tgl_masuk', 'like', "%" . $search . "%")
                 ->orWhereHas('barang', function ($query) use ($search) {
                     return $query->where('nama_barang', 'like', "%" . $search . "%");
@@ -76,12 +77,12 @@ class BarangMasukController extends Controller
             'id_keluar' => 'required',
             'id_barang' => 'required',
             'jumlah_masuk' => 'required',
+            'penerima' => 'required',
             'tgl_masuk' => 'required',
         ]);
 
-
         $masuk = BarangMasuk::create($request->all());
-
+        $masuk->penerima = $request->get('penerima');
         $masuk->barang->where('id', $masuk->id_barang)
             ->update([
                 'jumlah_barang' => ($masuk->barang->jumlah_barang + ($masuk->jumlah_masuk)),
@@ -136,6 +137,7 @@ class BarangMasukController extends Controller
             'id_keluar' => 'required',
             'id_barang' => 'required',
             'jumlah_masuk' => 'required',
+            'penerima' => 'required',
             'tgl_masuk' => 'required',
 
         ]);
@@ -143,6 +145,7 @@ class BarangMasukController extends Controller
 
         $masuk = BarangMasuk::with('BarangKeluar')->where('kode_masuk', $kode_masuk)->first();
         $masuk->tgl_masuk = $request->get('tgl_masuk');
+        $masuk->penerima = $request->get('penerima');
         $keluar = BarangKeluar::find($request->get('id_keluar'));
 
         $masuk->BarangKeluar()->associate($keluar);

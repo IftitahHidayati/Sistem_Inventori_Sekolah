@@ -68,6 +68,12 @@
                             </div>
                         </div>
                         <div class="form-group row" style="padding-left: 20px">
+                            <label for="penerima" class="col-sm-10 col-md-4 col-form-label text-white">Penerima</label>
+                            <div class="col-md-7 col-sm-12">
+                                <input class="form-control" type="text" name="penerima" id="penerima" value="{{ $masuk->penerima }}" aria-describedby="penerima" placeholder="Disabled input" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group row" style="padding-left: 20px">
                             <label for="jumlah_masuk" class="col-sm-10 col-md-4 col-form-label text-white">Jumlah Masuk</label>
                             <div class="col-md-7 col-sm-12">
                                 <input class="form-control" type="number" name="jumlah_masuk" id="jumlah_masuk" value="{{ $masuk->jumlah_masuk }}" aria-describedby="jumlah_masuk" placeholder="Disabled input" disabled="">

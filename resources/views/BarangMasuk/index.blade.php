@@ -53,6 +53,7 @@
                         <th>Barang</th>
                         <th>Penanggung Jawab</th>
                         <th>Peminjam</th>
+                        <th>Penerima</th>
                         <th>Jumlah</th>
                         <th>Tgl Masuk</th>
                         <th>Status</th>
@@ -67,6 +68,7 @@
                         <td>{{ $data->barang->nama_barang }}</td>
                         <td>{{ $data->BarangKeluar->penanggung_jawab }}</td>
                         <td>{{ $data->BarangKeluar->peminjam }}</td>
+                        <td>{{ $data->penerima }}</td>
                         <td>{{ $data->jumlah_masuk }}</td>
                         <td>{{ $data->tgl_masuk}}</td>
                         <td>

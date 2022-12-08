@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="penanggung_jawab" class="col-sm-12 col-md-2 col-form-label text-white">Penaggung Jawab</label>
+            <label for="penanggung_jawab" class="col-sm-12 col-md-2 col-form-label text-white">Penanggung Jawab</label>
             <div class="col-sm-12 col-md-10">
                 <input class="form-control" type="text" name="penanggung_jawab" id="penanggung_jawab" value="{{ $keluar->penanggung_jawab }}" aria-describedby="penanggung_jawab" placeholder="">
             </div>

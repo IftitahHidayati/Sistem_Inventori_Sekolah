@@ -10,15 +10,16 @@ use App\Models\BarangKeluar;
 class BarangMasuk extends Model
 {
     use HasFactory;
-    protected $table="barang_masuk"; // Eloquent akan membuat model BarangMasuk menyimpan record di tabel barang_masuk
+    protected $table = "barang_masuk"; // Eloquent akan membuat model BarangMasuk menyimpan record di tabel barang_masuk
     protected $primaryKey = 'kode_masuk'; // Memanggil isi DB Dengan primarykey
-    public $incrementing =false;
+    public $incrementing = false;
 
     protected $fillable = [
         'kode_masuk',
         'id_keluar',
         'id_barang',
         'jumlah_masuk',
+        'penerima',
         'tgl_masuk',
     ];
 
@@ -31,5 +32,4 @@ class BarangMasuk extends Model
     {
         return $this->belongsTo(BarangKeluar::class, 'id_keluar');
     }
-
 }
